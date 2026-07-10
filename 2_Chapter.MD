@@ -651,7 +651,7 @@ Finding:
 
 # 2.12 Parameters
 
-Parameters allow dynamic values in Power Query.
+Parameters allow dynamic values in Power Query. Similare purpose as vraibles but for models.
 
 Examples:
 
