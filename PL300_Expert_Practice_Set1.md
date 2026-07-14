@@ -7,9 +7,13 @@ A Microsoft Fabric semantic model contains 10 fact tables. Each fact table has O
 What should you do?
 
 A. Create a separate Date table for each fact table.
+
 B. Disable Auto Date/Time and create one marked Date table used throughout the model.
+
 C. Convert all Date columns to Text.
+
 D. Remove all relationships to Date columns.
+
 
 **Answer:** B
 
@@ -22,9 +26,13 @@ D. Remove all relationships to Date columns.
 A Sales table contains a GUID column with 150 million unique values. The column is never used in reports or relationships.
 
 A. Hide the column.
+
 B. Convert it to Text.
+
 C. Remove the column during data preparation.
+
 D. Create a hierarchy.
+
 
 **Answer:** C
 
@@ -37,9 +45,13 @@ D. Create a hierarchy.
 Query folding stops after adding a custom M function.
 
 A. Rewrite the logic so it executes in SQL.
+
 B. Create a calculated column.
+
 C. Switch to Live Connection.
+
 D. Enable Auto Date/Time.
+
 
 **Answer:** A
 
@@ -82,9 +94,13 @@ D. Convert Product to Text.
 Management requests Year-to-Date Sales compared to the same period last year.
 
 A. TOTALYTD() + SAMEPERIODLASTYEAR()
+
 B. FIRSTDATE()
+
 C. VALUES()
+
 D. REMOVEFILTERS()
+
 
 **Answer:** A
 
@@ -1058,3 +1074,1006 @@ PARALLELPERIOD returns an entire shifted period and is generally less appropriat
 | View distinct values and frequency | Column Distribution |
 | Classify confidential data | Sensitivity Labels |
 | Compare same dates from last year | DATEADD() or SAMEPERIODLASTYEAR() (depending on the business requirement) |
+
+
+# PL-300 Expert Practice Questions – Set 5
+### Mixed Scenario Questions (Accessibility, Desktop vs Service, Performance, Power Query)
+
+These questions are written to resemble Microsoft's PL-300 exam. Several answers may seem reasonable, but only **one is the BEST solution.**
+
+---
+
+# Question 1 – Accessibility
+
+A report will be distributed throughout your organization.
+
+Several users rely on screen readers to navigate reports.
+
+You need to improve accessibility without changing the report layout.
+
+What should you do?
+
+A. Add Alt Text to each visual.
+
+B. Increase the report page size.
+
+C. Add more bookmarks.
+
+D. Create additional pages.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Alt Text provides descriptions of visuals for screen readers and is one of Microsoft's primary accessibility recommendations.
+
+---
+
+# Question 2 – Accessibility
+
+A report contains:
+
+- Red bars for losses
+- Green bars for profits
+
+Some users have difficulty distinguishing the colors.
+
+What should you do?
+
+A. Increase the font size.
+
+B. Use color alone since the values are correct.
+
+C. Use additional indicators such as labels or patterns instead of relying only on color.
+
+D. Create another report.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Power BI accessibility guidance recommends **not relying solely on color** to communicate information.
+
+---
+
+# Question 3 – Desktop vs Service
+
+A report author creates a report in Power BI Desktop.
+
+They publish both the report and semantic model to a Microsoft Fabric workspace.
+
+The report should refresh automatically every morning.
+
+Where should the refresh schedule be configured?
+
+A. Power BI Desktop
+
+B. Microsoft Fabric (Power BI Service)
+
+C. Power Query Editor
+
+D. DAX Studio
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Scheduled Refresh is configured after publishing in the Power BI Service (Fabric), not in Desktop.
+
+---
+
+# Question 4 – Desktop vs Service
+
+A report refreshes successfully in Power BI Desktop.
+
+After publishing, scheduled refresh fails because the data source is an on-premises SQL Server.
+
+What is the MOST likely cause?
+
+A. The semantic model is too large.
+
+B. An On-premises Data Gateway has not been configured.
+
+C. The report contains bookmarks.
+
+D. Query folding is disabled.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The Power BI Service cannot directly access on-premises data sources without an On-premises Data Gateway.
+
+---
+
+# Question 5 – Power Query Join
+
+You have two tables:
+
+Orders
+
+Customers
+
+You need to keep **every order**, even if no matching customer record exists.
+
+Which merge option should you choose?
+
+A. Only matching rows
+
+B. All rows from Orders and matching rows from Customers
+
+C. Only rows that exist in both tables and nowhere else
+
+D. Only rows from Customers
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+This describes a **Left Outer** merge without using join terminology. Every record from the first table is preserved.
+
+---
+
+# Question 6 – Power Query Merge
+
+A Product table contains discontinued products.
+
+A Sales table contains every product ever sold.
+
+You need a list of products that **have never been sold**.
+
+Which merge result should you choose?
+
+A. Keep only matching rows.
+
+B. Keep all rows from Sales.
+
+C. Keep only rows from Product that have no matching Sales record.
+
+D. Append the tables.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+This is the behavior of a **Left Anti** merge. It returns rows from the first table that have **no corresponding match** in the second table.
+
+---
+
+# Question 7 – Data Profiling
+
+A developer wants to determine:
+
+- Percentage of valid values
+- Percentage of empty values
+- Percentage of error values
+
+Which Power Query feature should be used?
+
+A. Column Distribution
+
+B. Column Profile
+
+C. Column Quality
+
+D. Performance Analyzer
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Column Quality summarizes each column by showing the percentages of valid, empty, and error values.
+
+---
+
+# Question 8 – Data Profiling
+
+A developer wants to understand:
+
+- Number of distinct values
+- Number of unique values
+- Most frequently occurring values
+
+Which Power Query feature should be used?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Diagnostics
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Column Distribution displays distinct values, unique values, and value frequency.
+
+---
+
+# Question 9 – Data Profiling
+
+A developer needs detailed statistics for a single numeric column, including:
+
+- Minimum
+- Maximum
+- Average
+- Standard deviation
+- Value distribution
+
+Which feature should be used?
+
+A. Column Profile
+
+B. Column Quality
+
+C. Column Distribution
+
+D. Data View
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Column Profile provides comprehensive statistics and detailed analysis for an individual column.
+
+---
+
+# Question 10 – Performance Analyzer
+
+Users report that a report page loads slowly.
+
+You need to determine whether the delay is caused by:
+
+- DAX queries
+- Visual rendering
+- Other processing
+
+Which tool should you use FIRST?
+
+A. Query Diagnostics
+
+B. Performance Analyzer
+
+C. Power Query Editor
+
+D. Model View
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Performance Analyzer breaks report execution into DAX query time, visual display time, and other processing, making it the first tool to identify report performance bottlenecks.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Requirement | Best Feature |
+|--------------|-------------|
+| Describe visuals for screen readers | Alt Text |
+| Don't rely only on color | Labels, icons, or patterns |
+| Configure scheduled refresh | Power BI Service (Fabric) |
+| Refresh on-premises SQL | On-premises Data Gateway |
+| Keep all rows from first table | "All rows from first table and matching rows from second" |
+| Find records without matches | "Only rows from first table with no matches" |
+| Valid / Empty / Error percentages | Column Quality |
+| Distinct values & frequency | Column Distribution |
+| Detailed statistics for one column | Column Profile |
+| Analyze report rendering performance | Performance Analyzer |
+
+## 🚨 Exam Tip
+
+Microsoft often describes merge operations **without naming the join type**. Focus on the behavior:
+
+- **Keep all rows from the first table** → Left Outer
+- **Keep only matching rows** → Inner
+- **Keep only rows from the first table with no match** → Left Anti
+- **Keep only rows from the second table with no match** → Right Anti
+
+Understanding the result is more important than memorizing the join names.
+
+
+# PL-300 Expert Practice Questions – Set 5
+### Power BI Service vs Desktop | Performance Analyzer | Publishing | Refresh | Sharing
+
+These questions are intentionally written to resemble Microsoft's PL-300 exam. Several answers may be technically correct, but only one is the **BEST** solution.
+
+---
+
+# Question 1 – Desktop vs Service
+
+A report author creates a report in **Power BI Desktop**.
+
+Business users request a dashboard that pins visuals from multiple reports and allows alerting on KPI tiles.
+
+Where must this functionality be created?
+
+A. Power BI Desktop
+
+B. Power Query Editor
+
+C. Power BI Service
+
+D. DAX Studio
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Dashboards only exist in the **Power BI Service**.
+
+Desktop creates reports.
+
+Service provides:
+
+- Dashboards
+- Apps
+- Sharing
+- Subscriptions
+- Data Alerts
+
+---
+
+# Question 2 – Performance Analyzer
+
+A report page requires 18 seconds to load.
+
+Performance Analyzer returns the following:
+
+| Component | Time |
+|------------|------|
+| DAX Query | 14 sec |
+| Visual Display | 1 sec |
+| Other | 3 sec |
+
+What should you investigate FIRST?
+
+A. The visual formatting
+
+B. The DAX measures
+
+C. Report theme
+
+D. Bookmarks
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The majority of execution time occurs in the DAX query.
+
+Optimizing measures, relationships, filter context, or model design will have the greatest impact.
+
+---
+
+# Question 3 – Performance Analyzer
+
+Performance Analyzer shows:
+
+| Component | Time |
+|------------|------|
+| DAX Query | 0.4 sec |
+| Visual Display | 8 sec |
+| Other | 0.3 sec |
+
+What is the MOST likely cause?
+
+A. Inefficient DAX
+
+B. Too many visual elements being rendered
+
+C. Missing relationships
+
+D. Query folding has stopped
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The data is retrieved quickly.
+
+Rendering the visual itself is taking most of the time.
+
+Large matrices, maps, custom visuals, and excessive conditional formatting often increase rendering time.
+
+---
+
+# Question 4 – Publishing
+
+A developer publishes an updated PBIX file to a Fabric workspace.
+
+The report already exists in the workspace.
+
+What happens?
+
+A. A second report is created automatically.
+
+B. The existing report and semantic model are replaced.
+
+C. Only the report is updated.
+
+D. Only the semantic model is updated.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Publishing the same PBIX replaces both the report and semantic model unless different publishing techniques are used.
+
+---
+
+# Question 5 – Scheduled Refresh
+
+A semantic model refreshes successfully in Desktop.
+
+After publishing to the Power BI Service, scheduled refresh fails.
+
+The source is an on-premises SQL Server.
+
+What is the MOST likely cause?
+
+A. Query folding stopped.
+
+B. A gateway has not been configured.
+
+C. Auto Date/Time is disabled.
+
+D. Relationships are inactive.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The Power BI Service cannot directly access on-premises data sources.
+
+An On-premises Data Gateway is required.
+
+---
+
+# Question 6 – Service Permissions
+
+A manager should:
+
+- View reports
+- Create new reports using an existing semantic model
+- Not edit workspace content
+
+Which combination is BEST?
+
+A. Viewer + Build permission
+
+B. Member
+
+C. Contributor
+
+D. Admin
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Viewer allows viewing workspace content.
+
+Build permission allows creating reports from semantic models.
+
+Neither grants editing rights.
+
+---
+
+# Question 7 – Dashboards
+
+A dashboard contains tiles pinned from four different reports.
+
+One report is updated and republished.
+
+What happens?
+
+A. The dashboard tile automatically reflects the updated report.
+
+B. The dashboard must be recreated.
+
+C. The dashboard becomes disconnected.
+
+D. Every tile must be repinned.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Pinned dashboard tiles continue referencing the report.
+
+Republishing the report updates the dashboard automatically.
+
+---
+
+# Question 8 – Performance Optimization
+
+A report page contains:
+
+- 24 visuals
+- 9 slicers
+- 5 cards
+- 3 matrices
+
+Users complain that opening the page is slow.
+
+Which change is MOST likely to improve report performance?
+
+A. Increase font sizes.
+
+B. Reduce the number of visuals displayed simultaneously.
+
+C. Change every visual to a table.
+
+D. Add more slicers.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Each visual sends queries and requires rendering.
+
+Reducing unnecessary visuals often produces immediate performance improvements.
+
+---
+
+# Question 9 – Analyze Performance
+
+Performance Analyzer reports:
+
+| Component | Time |
+|------------|------|
+| DAX Query | 1 sec |
+| Visual Display | 0.8 sec |
+| Other | 12 sec |
+
+What should you investigate FIRST?
+
+A. DAX calculations
+
+B. Model relationships
+
+C. Visual rendering
+
+D. Visual interactions, page navigation, or external processes
+
+## ✅ Answer
+
+**D**
+
+### Explanation
+
+"Other" includes activities such as waiting for visuals, page processing, and miscellaneous client-side operations.
+
+Since "Other" dominates the execution time, DAX optimization is unlikely to solve the issue.
+
+---
+
+# Question 10 – Service vs Desktop
+
+Which feature is available **only** in the Power BI Service?
+
+A. Power Query Editor
+
+B. Performance Analyzer
+
+C. Data Alerts
+
+D. Relationship View
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Data Alerts can only be configured in the Power BI Service.
+
+Desktop includes:
+
+- Modeling
+- Relationships
+- Performance Analyzer
+- Power Query
+
+Service includes:
+
+- Dashboards
+- Apps
+- Data Alerts
+- Sharing
+- Subscriptions
+- Usage Metrics
+
+---
+
+# ⭐ PL-300 Desktop vs Service Review
+
+| Feature | Desktop | Service |
+|----------|:-------:|:-------:|
+| Build Reports | ✅ | Limited editing |
+| Power Query Editor | ✅ | ❌ |
+| Model View | ✅ | ❌ |
+| Relationships | ✅ | ❌ |
+| Performance Analyzer | ✅ | ❌ |
+| Publish Reports | ✅ | ✅ |
+| Dashboards | ❌ | ✅ |
+| Apps | ❌ | ✅ |
+| Data Alerts | ❌ | ✅ |
+| Subscriptions | ❌ | ✅ |
+| Scheduled Refresh | ❌ | ✅ |
+| Usage Metrics | ❌ | ✅ |
+| Share Reports | ❌ | ✅ |
+| Manage Workspace Roles | ❌ | ✅ |
+
+---
+
+# ⭐ PL-300 Performance Analyzer Cheat Sheet
+
+When reading Performance Analyzer results, focus on the **largest value**:
+
+| Largest Time | Investigate |
+|---------------|-------------|
+| **DAX Query** | Measures, filter context, relationships, model design |
+| **Visual Display** | Complex visuals, matrices, maps, custom visuals, excessive formatting |
+| **Other** | Page interactions, client processing, visual dependencies, miscellaneous operations |
+
+**Exam Tip:** On the PL-300, Microsoft often gives you Performance Analyzer timings. The correct answer is usually the component with the **highest execution time**, since that's where optimization will have the greatest impact.
+
+# PL-300 Expert Practice Questions – Set 6
+## Microsoft PL-300 Style (Mixed Topics)
+---
+
+# Question 1 – Performance Analyzer
+
+A report page contains six visuals.
+
+Performance Analyzer returns the following results:
+
+| Visual | DAX Query | Visual Display |
+|---------|----------:|---------------:|
+| Sales by Product | 0.4 sec | 0.3 sec |
+| Sales by Customer | 5.8 sec | 0.4 sec |
+| Monthly Trend | 0.5 sec | 0.2 sec |
+| KPI Cards | 0.2 sec | 0.1 sec |
+
+You need to improve report performance.
+
+What should you investigate first?
+
+A. The Product visual formatting
+
+B. The DAX measures and model used by **Sales by Customer**
+
+C. The report theme
+
+D. The page background image
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Performance Analyzer shows that almost all of the delay comes from the DAX query for one visual. Optimizing that measure or its model will have the greatest impact.
+
+---
+
+# Question 2 – Matrix vs Table
+
+Management wants a report showing:
+
+- Product Categories
+- Products beneath each category
+- Sales by Year
+- Expand/Collapse buttons
+- Row subtotals
+
+Which visual should you use?
+
+A. Table
+
+B. Matrix
+
+C. Multi-row Card
+
+D. Clustered Column Chart
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A Matrix supports hierarchical rows, expandable groups, subtotals, and values across columns. A Table cannot create expandable hierarchies.
+
+---
+
+# Question 3 – Matrix Requirements
+
+A finance report should display:
+
+```
+Region
+   Product Category
+      Product
+```
+
+Users should be able to drill into lower levels and collapse the hierarchy.
+
+Which visual best satisfies the requirement?
+
+A. Table
+
+B. Matrix
+
+C. Treemap
+
+D. Decomposition Tree
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The Matrix visual is specifically designed for hierarchical row structures with expand/collapse functionality.
+
+---
+
+# Question 4 – Performance Analyzer
+
+Performance Analyzer reports:
+
+| Component | Time |
+|-----------|------|
+| DAX Query | 0.6 sec |
+| Visual Display | 7.9 sec |
+| Other | 0.4 sec |
+
+Which action is MOST likely to improve performance?
+
+A. Rewrite DAX measures
+
+B. Reduce the complexity or number of visuals
+
+C. Create additional relationships
+
+D. Change storage mode
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The DAX query is already fast. Most of the delay occurs while rendering the visual.
+
+---
+
+# Question 5 – Visual Interactions
+
+A report contains:
+
+- A bar chart
+- A map
+- A KPI card
+
+Selecting a bar in the chart filters the map, but management wants the KPI card to remain unchanged.
+
+What should you do?
+
+A. Disable cross-highlighting.
+
+B. Edit Visual Interactions.
+
+C. Remove the relationship.
+
+D. Duplicate the KPI card.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Edit Interactions allows you to control which visuals filter, highlight, or ignore each other.
+
+---
+
+# Question 6 – Field Parameters
+
+A report currently contains three identical charts:
+
+- Revenue
+- Profit
+- Margin
+
+Management wants only one chart while allowing users to choose which metric to display.
+
+What is the BEST solution?
+
+A. Bookmarks
+
+B. Drillthrough
+
+C. Field Parameters
+
+D. Conditional Formatting
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Field Parameters allow users to dynamically switch the displayed measure without creating multiple visuals.
+
+---
+
+# Question 7 – Small Multiples
+
+Management wants to compare monthly sales trends for every sales region using identical line charts displayed in a grid.
+
+Which visual feature should you use?
+
+A. Drillthrough
+
+B. Matrix
+
+C. Small Multiples
+
+D. Bookmarks
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Small Multiples display the same visual repeatedly for each category, making comparisons much easier.
+
+---
+
+# Question 8 – Tooltip Pages
+
+Users want additional product details to appear only when hovering over a visual.
+
+Which feature should you implement?
+
+A. Drillthrough
+
+B. Tooltip Page
+
+C. Bookmark
+
+D. Q&A
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Report Tooltip pages display detailed information when users hover over a data point without navigating away from the report.
+
+---
+
+# Question 9 – Conditional Formatting
+
+A manager wants Sales values to appear:
+
+- Green when above target
+- Red when below target
+
+Which feature should be used?
+
+A. Themes
+
+B. Conditional Formatting
+
+C. Bookmarks
+
+D. Slicers
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Conditional Formatting dynamically changes colors or icons based on business rules.
+
+---
+
+# Question 10 – Choosing the Correct Visual
+
+Management wants a report that answers:
+
+> "Which factors most strongly influence whether customers purchase premium products?"
+
+Which visual should you recommend?
+
+A. Matrix
+
+B. Scatter Chart
+
+C. Key Influencers
+
+D. Waterfall Chart
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+The Key Influencers visual uses statistical analysis to identify the factors that most influence a selected outcome.
+
+---
+
+# ⭐ PL-300 Visual Selection Cheat Sheet
+
+| Business Requirement | Best Visual |
+|----------------------|-------------|
+| Hierarchical rows with expand/collapse | **Matrix** |
+| Flat list of records | **Table** |
+| Compare many identical charts | **Small Multiples** |
+| Explain what drives an outcome | **Key Influencers** |
+| Break down contributors interactively | **Decomposition Tree** |
+| Show extra information on hover | **Tooltip Page** |
+| Switch between measures or dimensions | **Field Parameters** |
+| Apply colors/icons based on values | **Conditional Formatting** |
+| Control how visuals affect each other | **Edit Interactions** |
+
+---
+
+### 💡 PL-300 Exam Tip
+
+Microsoft often describes a business requirement rather than naming the feature directly. Learn to recognize the keywords:
+
+- **Expand / Collapse** → Matrix
+- **Hover for details** → Tooltip Page
+- **Choose Revenue or Profit** → Field Parameters
+- **Why did this happen?** → Key Influencers
+- **Break down by category interactively** → Decomposition Tree
+- **Show many identical charts by category** → Small Multiples
+- **One visual should not filter another** → Edit Interactions
