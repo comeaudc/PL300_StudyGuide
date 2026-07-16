@@ -3941,11 +3941,11 @@ D. Admin
 
 ## ✅ Answer
 
-**C**
+**B**
 
 ### Explanation
 
-A **Member** can publish, edit, and manage content but cannot manage workspace access like an Admin.
+A **Contributer** can publish, edit, and manage content but cannot manage workspace access like an Admin.
 
 ---
 
@@ -4061,3 +4061,673 @@ A **Clustered Column Chart** allows users to compare Actual versus Target across
 | "Same filter across report pages" | Sync Slicers |
 | "Compare two measures across categories" | Clustered Column Chart |
 | "Add columns from another table" | Merge |
+
+# PL-300 Expert Practice Questions – Set 14
+## Advanced Microsoft Exam-Style Scenarios (Mixed Topics)
+
+These questions are written to resemble the reasoning style used on the PL-300 exam. More than one answer may seem reasonable, but only **one is the BEST answer.**
+
+---
+
+# Question 1 – Append vs Merge
+
+A company stores sales transactions in separate yearly tables:
+
+- Sales2023
+- Sales2024
+- Sales2025
+
+Each table contains identical columns.
+
+Management wants one report that analyzes sales across all three years.
+
+What should you do?
+
+A. Merge the three queries.
+
+B. Append the three queries.
+
+C. Create relationships between the three tables.
+
+D. Create calculated columns that combine the tables.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Appending combines rows from tables with the same structure. Merge is used when combining columns from related tables.
+
+---
+
+# Question 2 – Column Distribution
+
+A developer notices duplicate customer IDs in a CSV file.
+
+Which Power Query feature is the BEST choice to quickly determine how frequently each CustomerID appears?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Dependencies
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Column Distribution displays distinct values and their frequency, making duplicate values easy to identify.
+
+---
+
+# Question 3 – Dashboard Tiles
+
+A dashboard already contains a pinned KPI visual.
+
+The underlying report visual is modified to display profit instead of revenue.
+
+What happens to the dashboard tile?
+
+A. The tile automatically reflects the updated visual after the report is republished.
+
+B. The dashboard tile must be recreated.
+
+C. The dashboard becomes disconnected.
+
+D. Dashboard tiles never update.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Dashboard tiles remain linked to the report visual. Once the updated report is published, the tile reflects the changes.
+
+---
+
+# Question 4 – Dashboard Alerts
+
+A manager wants to receive an email notification whenever inventory falls **below** 100 units.
+
+Which object can support a data alert?
+
+A. A report visual in Power BI Desktop
+
+B. A dashboard tile based on a supported visual
+
+C. A Matrix visual
+
+D. A paginated report
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Data alerts are configured on supported dashboard tiles in the Power BI Service, not directly on report visuals.
+
+---
+
+# Question 5 – Edit Interactions
+
+A report contains:
+
+- Matrix
+- Slicer
+- Stacked Column Chart
+
+Selecting a row in the Matrix should **highlight** the chart instead of filtering it.
+
+What should you configure?
+
+A. Sync Slicers
+
+B. Edit Interactions
+
+C. Drillthrough
+
+D. Cross-report filtering
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Edit Interactions allows you to choose whether visuals filter, highlight, or ignore one another.
+
+---
+
+# Question 6 – Suitable Visual
+
+Management wants to display:
+
+- Revenue
+- Expenses
+- Profit
+
+for each department in a single comparison.
+
+Which visual is MOST appropriate?
+
+A. Pie Chart
+
+B. Clustered Bar Chart
+
+C. KPI
+
+D. Gauge
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A clustered bar (or clustered column) chart is ideal for comparing multiple measures across categories.
+
+---
+
+# Question 7 – Paginated Reports
+
+A regulatory agency requires a report that:
+
+- Always prints exactly 50 rows per page
+- Includes page numbers
+- Repeats column headers on every page
+
+Which reporting option should you choose?
+
+A. Power BI Report
+
+B. Dashboard
+
+C. Paginated Report
+
+D. Scorecard
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Paginated Reports are designed for precise printing, page control, and large tabular reports.
+
+---
+
+# Question 8 – Top N
+
+A sales report should always display the **Top 20 Customers by Revenue**, regardless of how many customers exist in the dataset.
+
+What is the BEST approach?
+
+A. Filter the source data in Power Query.
+
+B. Use a Top N visual filter based on the Revenue measure.
+
+C. Delete customers outside the top 20.
+
+D. Create a relationship to a ranking table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Top N visual filters dynamically calculate rankings based on the current filter context.
+
+---
+
+# Question 9 – Column Quality
+
+A developer wants to quickly identify:
+
+- Error values
+- Empty values
+- Valid values
+
+Which profiling tool should be used?
+
+A. Column Profile
+
+B. Column Quality
+
+C. Column Distribution
+
+D. Query Diagnostics
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Column Quality provides percentages of valid, empty, and error values for each column.
+
+---
+
+# Question 10 – Workspace Permissions vs Report Sharing
+
+A user has **Viewer** access to a workspace.
+
+The report owner shares a report directly with the user.
+
+The user can open the report but cannot create a new report from the semantic model.
+
+What additional permission is required?
+
+A. Member
+
+B. Build
+
+C. Admin
+
+D. Contributor
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Sharing a report allows the user to view it. Creating new reports from the underlying semantic model requires **Build** permission.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Requirement | Correct Solution |
+|-------------|------------------|
+| Combine yearly transaction tables | Append |
+| Find duplicate values | Column Distribution |
+| Update dashboard tile | Republish updated report |
+| Email notification on KPI | Dashboard Alert |
+| Change filter/highlight behavior | Edit Interactions |
+| Compare several measures by category | Clustered Bar/Column Chart |
+| Pixel-perfect printed reports | Paginated Report |
+| Highest N records | Top N Filter |
+| Find errors and blanks | Column Quality |
+| Create reports from a shared semantic model | Build Permission |
+
+---
+
+## 🚨 Microsoft Exam Tips
+
+**Append vs Merge**
+
+- Same columns → **Append**
+- Related tables → **Merge**
+
+**Power Query Profiling**
+
+- **Column Quality** → Errors, Empty, Valid
+- **Column Distribution** → Frequency, Distinct Values
+- **Column Profile** → Full statistics (min, max, average, distinct count)
+
+**Desktop vs Service**
+
+- Dashboard Alerts → **Service**
+- Pin Dashboard Tiles → **Service**
+- Paginated Reports → Published and consumed through the Service
+- Power Query transformations → **Desktop**
+
+
+
+# PL-300 Expert Practice Questions – Set 15
+## Advanced Mixed Scenarios
+
+These questions are written to closely resemble the reasoning style used on the PL-300 exam. Read each business requirement carefully and choose the **BEST** solution.
+
+---
+
+# Question 1 – Data Reduction
+
+A semantic model contains 45 million sales records.
+
+A report page contains a scatter chart displaying every individual sale.
+
+Users report that the visual is slow and difficult to interpret.
+
+You need to improve report performance while still allowing users to identify sales trends.
+
+What should you do?
+
+A. Replace the scatter chart with a table.
+
+B. Aggregate the data before displaying it in the visual.
+
+C. Change the storage mode to DirectQuery.
+
+D. Increase the canvas size.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Displaying millions of individual points provides little analytical value. Aggregating the data (for example by month, region, or product) improves both readability and performance.
+
+---
+
+# Question 2 – Merge Join Types
+
+You have two tables:
+
+**Orders**
+
+Contains every customer order.
+
+**Returns**
+
+Contains only returned orders.
+
+Management wants a report showing every order, with return information when available.
+
+Which join should be used?
+
+A. Inner
+
+B. Left Anti
+
+C. Left Outer
+
+D. Full Outer
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A Left Outer join keeps every order while matching return information when it exists.
+
+---
+
+# Question 3 – Left Anti Join
+
+A company wants to identify customers who **have never placed an order**.
+
+You have:
+
+Customers
+
+Orders
+
+Which Merge Join should you use?
+
+A. Inner
+
+B. Left Outer
+
+C. Left Anti
+
+D. Right Outer
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A Left Anti join returns rows from the first table that have **no matching rows** in the second table.
+
+---
+
+# Question 4 – DAX Filter Context
+
+Management requests a measure that returns Sales for only the **Bikes** category.
+
+If users filter another category, the measure should still only calculate Bikes sales.
+
+Which expression is BEST?
+
+A.
+
+```DAX
+CALCULATE(
+    [Sales],
+    Product[Category]="Bikes"
+)
+```
+
+B.
+
+```DAX
+SUM(Sales[SalesAmount])
+```
+
+C.
+
+```DAX
+AVERAGE(Sales[SalesAmount])
+```
+
+D.
+
+```DAX
+TOTALYTD([Sales],Date[Date])
+```
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+`CALCULATE()` changes the filter context by applying a filter for Bikes, regardless of report selections.
+
+---
+
+# Question 5 – Query Dependencies
+
+A Power Query solution contains 28 queries.
+
+You need to understand which queries depend on other queries before making changes.
+
+Which feature should you use?
+
+A. Column Profile
+
+B. Query Dependencies
+
+C. Performance Analyzer
+
+D. Data View
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Query Dependencies provides a visual map showing relationships between Power Query queries.
+
+---
+
+# Question 6 – Import vs DirectQuery
+
+A company stores inventory in SQL Server.
+
+Inventory changes every 15 seconds.
+
+Executives require reports showing nearly real-time inventory.
+
+Which storage mode is MOST appropriate?
+
+A. Import
+
+B. DirectQuery
+
+C. Dual
+
+D. Live Connection
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+DirectQuery retrieves data from the source during query execution, making it appropriate for near real-time reporting.
+
+---
+
+# Question 7 – Suitable Visual
+
+Management wants to compare:
+
+- Budget
+- Actual
+
+across 40 departments.
+
+Users should immediately see which departments exceeded budget.
+
+Which visual is BEST?
+
+A. Pie Chart
+
+B. Clustered Bar Chart
+
+C. Gauge
+
+D. Card
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Clustered bar charts are effective for comparing multiple measures across many categories.
+
+---
+
+# Question 8 – PBIX vs PBIT vs PBIDS
+
+A consulting company wants to distribute a Power BI file that contains:
+
+- Report layout
+- Measures
+- Queries
+
+but **no imported data**.
+
+Which file should they provide?
+
+A. PBIX
+
+B. PBIDS
+
+C. PBIT
+
+D. CSV
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A **PBIT** (Power BI Template) stores the report definition without the imported data, making it ideal for reusable templates.
+
+---
+
+# Question 9 – Report Accessibility
+
+A report relies heavily on red and green colors to indicate performance.
+
+The organization wants the report to be accessible to users with color vision deficiencies.
+
+Which solution BEST meets the requirement?
+
+A. Increase font sizes.
+
+B. Add icons or shapes in addition to color.
+
+C. Replace the report with a table.
+
+D. Remove conditional formatting.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Color alone should not communicate meaning. Icons, labels, or shapes improve accessibility for users with color vision deficiencies.
+
+---
+
+# Question 10 – Report Pages
+
+A report contains:
+
+- Executive Summary
+- Sales Detail
+- Customer Detail
+- Inventory Detail
+
+Executives should only navigate to the Executive Summary page, while analysts should be able to access every page.
+
+What is the BEST solution?
+
+A. Create four separate reports.
+
+B. Hide the detailed pages before publishing the executive version of the report.
+
+C. Duplicate every page.
+
+D. Create four workspaces.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Hidden pages provide a cleaner navigation experience while remaining available when appropriate. If different audiences require different content, separate reports or apps may also be appropriate, but for this requirement hiding the pages is the simplest solution.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Requirement | Best Solution |
+|--------------|---------------|
+| Millions of data points | Aggregate before visualizing |
+| Keep all rows from first table | Left Outer Join |
+| Find records without matches | Left Anti Join |
+| Force a filter in a measure | CALCULATE() |
+| Show query relationships | Query Dependencies |
+| Near real-time reporting | DirectQuery |
+| Compare Budget vs Actual | Clustered Bar/Column |
+| Share report without data | PBIT |
+| Accessibility | Icons + Color |
+| Simplify report navigation | Hide Pages |
+
+---
+
+## 🚨 PL-300 Exam Traps
+
+- **PBIX** = Report + Model + Data
+- **PBIT** = Report + Model (No Data)
+- **PBIDS** = Connection shortcut to a data source
+
+- **Left Outer** = Keep all matches from the first table
+- **Left Anti** = Return only rows with **no** match
+
+- **Import** = Best performance
+- **DirectQuery** = Most current data
+- **Dual** = Optimizes composite models
+
+- Don't rely on **color alone** to communicate information—Microsoft frequently tests accessibility best practices.
