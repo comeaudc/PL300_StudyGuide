@@ -64,8 +64,11 @@ D. Enable Auto Date/Time.
 Sophia should only see East region sales. Ryan should only view reports. Emma should edit reports.
 
 A. Emma=Member, Ryan=Viewer, Sophia=Viewer + Dynamic RLS
+
 B. Emma=Admin, Ryan=Member, Sophia=Viewer
+
 C. Everyone=Viewer
+
 D. Create three workspaces
 
 **Answer:** A
@@ -79,8 +82,14 @@ D. Create three workspaces
 A 900-million-row Sales table uses DirectQuery. Users primarily analyze monthly totals.
 
 A. Import the Sales table.
+
+
 B. Create Import aggregation tables.
+
+
 C. Duplicate the Sales table.
+
+
 D. Convert Product to Text.
 
 **Answer:** B
@@ -113,8 +122,11 @@ D. REMOVEFILTERS()
 A Certified Semantic Model already contains all required measures.
 
 A. Download the PBIX and duplicate it.
+
 B. Connect to the Certified Semantic Model.
+
 C. Export to Excel.
+
 D. Re-import the data.
 
 **Answer:** B
@@ -128,8 +140,11 @@ D. Re-import the data.
 After changing a column from Text to Whole Number, only a few rows display Error while the remaining rows load successfully.
 
 A. Step-level error
+
 B. Cell-level error
+
 C. Load error
+
 D. Data source error
 
 **Answer:** B
@@ -143,8 +158,11 @@ D. Data source error
 Which action is LEAST likely to reduce an imported semantic model's size?
 
 A. Remove unused columns
+
 B. Remove unused rows
+
 C. Add calculated columns
+
 D. Change Decimal to Whole Number when appropriate
 
 **Answer:** C
@@ -158,8 +176,11 @@ D. Change Decimal to Whole Number when appropriate
 Your organization wants users to collaborate internally but prevent anonymous public report links.
 
 A. Disable Export Data
+
 B. Disable Publish to Web
+
 C. Disable Build Permission
+
 D. Disable XMLA Endpoint
 
 **Answer:** B
@@ -2077,3 +2098,1966 @@ Microsoft often describes a business requirement rather than naming the feature 
 - **Break down by category interactively** → Decomposition Tree
 - **Show many identical charts by category** → Small Multiples
 - **One visual should not filter another** → Edit Interactions
+
+# PL-300 Expert Practice Questions – Set 7
+### Microsoft Exam Style (Mixed Topics)
+
+These questions are designed to resemble the reasoning required on the PL-300 exam. Several answers may appear correct, but only **one is the BEST solution** according to Microsoft's recommended practices.
+
+---
+
+# Question 1 – Pivot vs Unpivot
+
+A sales spreadsheet contains one row per product.
+
+| Product | Jan | Feb | Mar | Apr |
+|----------|----:|----:|----:|----:|
+| Bike | 120 | 145 | 131 | 150 |
+| Helmet | 55 | 61 | 58 | 66 |
+
+You need to create a line chart showing sales by month.
+
+What should you do in Power Query?
+
+A. Pivot the Month columns.
+
+B. Unpivot the Month columns.
+
+C. Merge the table with itself.
+
+D. Group By Product.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Power BI visuals work best when dates are stored as values in a single column instead of separate columns. Unpivoting creates a structure like:
+
+| Product | Month | Sales |
+
+which is ideal for charts and DAX.
+
+---
+
+# Question 2 – Append vs Merge
+
+You have:
+
+**Orders**
+
+| OrderID | CustomerID |
+
+**Customers**
+
+| CustomerID | CustomerName |
+
+You need to display the customer name beside every order.
+
+Which transformation should you use?
+
+A. Append Queries
+
+B. Merge Queries
+
+C. Pivot
+
+D. Unpivot
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Merge combines related tables by matching keys. Append combines rows from tables with the same structure.
+
+---
+
+# Question 3 – Many-to-Many Relationships
+
+A bridge table has already been created between Customers and Promotions.
+
+A developer suggests creating a direct relationship between Customers and Promotions as well.
+
+What is the BEST recommendation?
+
+A. Create the additional relationship.
+
+B. Replace the bridge table with calculated columns.
+
+C. Keep only the bridge-table relationship.
+
+D. Make both relationships bidirectional.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A bridge table is the recommended approach for resolving many-to-many relationships. Adding another direct relationship can create ambiguity and unexpected filter behavior.
+
+---
+
+# Question 4 – CALCULATE()
+
+A report contains a Region slicer.
+
+Management wants a measure that always returns total company sales regardless of the selected Region.
+
+Which measure should be used?
+
+A.
+
+```DAX
+CALCULATE([Total Sales], REMOVEFILTERS(Region))
+```
+
+B.
+
+```DAX
+SUM(Sales[SalesAmount])
+```
+
+C.
+
+```DAX
+AVERAGE(Sales[SalesAmount])
+```
+
+D.
+
+```DAX
+COUNTROWS(Sales)
+```
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+`CALCULATE()` modifies filter context. `REMOVEFILTERS()` ignores the Region filter while respecting all other report filters.
+
+---
+
+# Question 5 – Data Profiling
+
+A developer wants to inspect every value within a selected column, including:
+
+- Value distribution
+- Statistics
+- Distinct count
+
+Which Power Query feature should they use?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Diagnostics
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Column Profile provides the most detailed statistics for a selected column, including min, max, average, distinct values, and value distribution.
+
+---
+
+# Question 6 – Sync Slicers
+
+A report contains five pages.
+
+Management wants one Date slicer that automatically applies the same selection across every page.
+
+What should you do?
+
+A. Copy the slicer onto every page.
+
+B. Use Sync Slicers.
+
+C. Create bookmarks.
+
+D. Create Field Parameters.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Sync Slicers keeps slicer selections consistent across multiple report pages.
+
+---
+
+# Question 7 – Publish vs Share
+
+A report has been published to a Fabric workspace.
+
+Business users cannot find the report.
+
+What should you do FIRST?
+
+A. Export the report to Excel.
+
+B. Share the report or distribute it through a Power BI App.
+
+C. Republish the PBIX.
+
+D. Create a dashboard.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Publishing a report places it in a workspace. Users still need permission through direct sharing or a published App before they can access it.
+
+---
+
+# Question 8 – Star Schema
+
+A Sales table contains:
+
+- Customer Name
+- Customer City
+- Customer State
+- Customer Country
+
+These values repeat millions of times.
+
+What is the BEST redesign?
+
+A. Leave the table unchanged.
+
+B. Create a Customer dimension table and relate it to Sales.
+
+C. Duplicate the Sales table.
+
+D. Hide the customer columns.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Moving descriptive attributes into dimension tables reduces redundancy, improves compression, and follows star schema best practices.
+
+---
+
+# Question 9 – Choosing the Correct Visual
+
+Management asks:
+
+> "Show how Total Sales changed after discounts were applied, shipping costs were added, and taxes were included."
+
+Which visual is MOST appropriate?
+
+A. Scatter Chart
+
+B. Waterfall Chart
+
+C. Matrix
+
+D. Pie Chart
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A Waterfall chart highlights how sequential increases and decreases contribute to a final total.
+
+---
+
+# Question 10 – DAX Measures vs Calculated Columns
+
+A report needs to calculate Total Profit using the current filter context selected by users.
+
+Which approach is BEST?
+
+A. Create a calculated column.
+
+B. Create a measure.
+
+C. Duplicate the Profit column.
+
+D. Create another table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Measures are calculated at query time and automatically respond to slicers and filters. Calculated columns are computed during refresh and do not dynamically respond to report filter context in the same way.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Requirement | Best Choice |
+|--------------|-------------|
+| Convert month columns into rows | **Unpivot** |
+| Combine related tables | **Merge** |
+| Stack tables with the same columns | **Append** |
+| Ignore a slicer in a calculation | **CALCULATE() + REMOVEFILTERS()** |
+| Detailed column statistics | **Column Profile** |
+| Show valid/error/empty percentages | **Column Quality** |
+| Show value frequency | **Column Distribution** |
+| Same slicer on multiple pages | **Sync Slicers** |
+| Repeating descriptive data | **Dimension Table (Star Schema)** |
+| Show sequential increases/decreases | **Waterfall Chart** |
+| Dynamic calculations | **Measure** |
+
+# PL-300 Expert Practice Questions – Set 8
+## Microsoft Exam Style (Advanced Mixed Topics)
+
+These questions are designed to closely match the style of the PL-300 exam. Many answers may seem reasonable, but choose the **BEST** answer based on Microsoft's recommended practices.
+
+---
+
+# Question 1 – Active vs Inactive Relationships
+
+A semantic model contains the following tables:
+
+**Sales**
+
+- OrderDate
+- ShipDate
+- SalesAmount
+
+**Date**
+
+An active relationship exists between **Sales[OrderDate]** and **Date[Date]**.
+
+A report author creates a visual showing Sales by Ship Date, but the visual still displays sales by Order Date.
+
+You need to correct the calculation without changing the active relationship.
+
+What should you do?
+
+A. Create a second Date table.
+
+B. Use USERELATIONSHIP() in the measure.
+
+C. Change the relationship to bidirectional.
+
+D. Replace the Date table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+USERELATIONSHIP() temporarily activates an inactive relationship during measure evaluation without affecting the model.
+
+---
+
+# Question 2 – Visual Choice
+
+Management wants users to answer questions such as:
+
+- "Which region contributed most to the increase in sales?"
+- "Continue drilling into Product Category, Product, then Customer."
+
+Which visual best satisfies this requirement?
+
+A. Matrix
+
+B. Decomposition Tree
+
+C. Waterfall Chart
+
+D. Treemap
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The Decomposition Tree allows users to interactively drill into multiple dimensions and analyze contributors to a metric.
+
+---
+
+# Question 3 – Cross Filtering
+
+Selecting a state on a map highlights bars in a chart.
+
+Management wants the chart to filter instead of highlight.
+
+What should you do?
+
+A. Edit Interactions.
+
+B. Disable relationships.
+
+C. Create bookmarks.
+
+D. Use Drillthrough.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Edit Interactions lets you change whether visuals filter, highlight, or ignore one another.
+
+---
+
+# Question 4 – Reference vs Duplicate
+
+A Power Query query named **Sales_Clean** is updated every week.
+
+Another query should always inherit the latest cleaning steps before additional transformations are applied.
+
+Which option should you use?
+
+A. Duplicate
+
+B. Reference
+
+C. Merge
+
+D. Append
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A Reference inherits future changes made to the original query, making maintenance easier.
+
+---
+
+# Question 5 – Visual Performance
+
+A Matrix visual contains:
+
+- 7 hierarchy levels
+- Conditional formatting
+- Data bars
+- Icons
+- Thousands of rows
+
+Performance Analyzer shows:
+
+- DAX Query = 0.8 sec
+- Visual Display = 10.6 sec
+
+Which recommendation is BEST?
+
+A. Rewrite every measure.
+
+B. Simplify the Matrix visual.
+
+C. Create more calculated columns.
+
+D. Change every relationship to bidirectional.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+The bottleneck is rendering the Matrix, not executing DAX.
+
+---
+
+# Question 6 – Power Query
+
+A CSV file contains these columns:
+
+```
+Customer
+
+Phone1
+
+Phone2
+
+Phone3
+```
+
+The business wants:
+
+```
+Customer
+
+Phone Type
+
+Phone Number
+```
+
+Which transformation should you use?
+
+A. Merge
+
+B. Pivot
+
+C. Unpivot
+
+D. Split Column
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Unpivot converts multiple columns into attribute/value pairs, creating a normalized structure.
+
+---
+
+# Question 7 – Report Design
+
+A report contains twelve slicers.
+
+Users complain they spend too much time selecting filters every morning.
+
+Management wants yesterday's selections to automatically appear the next day.
+
+Which feature should users use?
+
+A. Bookmarks
+
+B. Personal Bookmarks
+
+C. Field Parameters
+
+D. Drillthrough
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Personal Bookmarks allow individual users to save and restore their own report state without affecting other users.
+
+---
+
+# Question 8 – DAX
+
+Management asks for a measure that returns the selected product name.
+
+If multiple products are selected, the measure should return "Multiple Products."
+
+Which function is most appropriate?
+
+A. VALUES()
+
+B. SELECTEDVALUE()
+
+C. DISTINCT()
+
+D. RELATED()
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+SELECTEDVALUE() returns a single value when one exists and an alternate result when multiple values are selected.
+
+---
+
+# Question 9 – Model Optimization
+
+A Product dimension contains:
+
+- ProductID
+- ProductName
+- ProductDescription
+- WarrantyTerms
+- MarketingNotes
+
+Only ProductName is used in reports.
+
+Which action follows Microsoft's recommended practice?
+
+A. Hide the unused columns.
+
+B. Remove unused columns in Power Query.
+
+C. Move the columns into another table within the semantic model.
+
+D. Convert the columns to Whole Number.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Removing unused columns before loading them reduces memory usage and improves refresh performance.
+
+---
+
+# Question 10 – Power BI Service
+
+A report has been published to a Fabric workspace.
+
+Management wants employees to access a curated collection of reports and dashboards without giving them access to the workspace itself.
+
+What should you create?
+
+A. A Dashboard
+
+B. A Power BI App
+
+C. A Perspective
+
+D. A Deployment Pipeline
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Power BI Apps provide users with a curated, read-only experience while allowing workspace owners to continue developing content independently.
+
+---
+
+# ⭐ PL-300 Review Notes
+
+| Requirement | Best Feature |
+|-------------|--------------|
+| Use inactive relationship | USERELATIONSHIP() |
+| Interactive root-cause analysis | Decomposition Tree |
+| Change filter/highlight behavior | Edit Interactions |
+| Inherit another query's transformations | Reference |
+| Convert repeated columns into rows | Unpivot |
+| Save personal report state | Personal Bookmarks |
+| Return one selected value | SELECTEDVALUE() |
+| Remove unused columns | Power Query |
+| Curated report distribution | Power BI App |
+| Optimize a slow Matrix | Reduce visual complexity before rewriting DAX if rendering is the bottleneck |
+
+---
+
+## 🚨 PL-300 Exam Traps
+
+### Matrix vs Table
+
+- **Matrix** = Hierarchies, subtotals, expand/collapse.
+- **Table** = Flat list of records.
+
+---
+
+### Report vs Dashboard
+
+- **Reports** → Multiple pages, interactive visuals.
+- **Dashboards** → One page, Service only, can combine visuals from multiple reports.
+
+---
+
+### App vs Workspace
+
+- **Workspace** → Where developers build and collaborate.
+- **App** → How business users consume finished content.
+
+---
+
+### Reference vs Duplicate
+
+- **Reference** → Inherits future changes.
+- **Duplicate** → Independent copy.
+
+---
+
+### Highlight vs Filter
+
+If a question asks:
+> "Change how visuals interact"
+
+The answer is almost always:
+
+✅ **Edit Interactions**
+
+# PL-300 Expert Practice Questions – Set 9
+## Advanced Mixed Topics (Lesser-Tested Objectives)
+
+These questions focus on PL-300 topics that are often overlooked during studying but still appear on the exam. Several answers may seem reasonable, but only **one is the BEST answer**.
+
+---
+
+# Question 1 – Assume Referential Integrity
+
+A semantic model uses DirectQuery to connect to SQL Server.
+
+The Sales table references the Product table through ProductID.
+
+The database administrator confirms that every ProductID in Sales always exists in Product.
+
+You want to improve query performance.
+
+What should you do?
+
+A. Change the relationship to Many-to-Many.
+
+B. Enable **Assume Referential Integrity** on the relationship.
+
+C. Change the relationship to Bidirectional.
+
+D. Import the Product table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+For DirectQuery models, enabling **Assume Referential Integrity** allows Power BI to generate INNER JOINs instead of OUTER JOINs, which can improve query performance when referential integrity is guaranteed.
+
+---
+
+# Question 2 – Data Profiling
+
+While cleaning a CSV file, you want to determine whether the data contains unexpected values such as "N/A", "Unknown", or misspellings.
+
+Which Power Query feature should you use FIRST?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Diagnostics
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Column Distribution quickly shows the frequency of values, making unexpected values easy to identify.
+
+Column Profile provides more detailed statistics but is generally used after identifying potential issues.
+
+---
+
+# Question 3 – Accessibility
+
+A report will be used by employees who rely on screen readers.
+
+Which action best improves report accessibility?
+
+A. Use only custom visuals.
+
+B. Add Alt Text to report visuals.
+
+C. Increase every font size to 24 pt.
+
+D. Disable cross-filtering.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Alternative text (Alt Text) allows screen readers to describe visuals, improving accessibility.
+
+---
+
+# Question 4 – Q&A Visual
+
+A Q&A visual rarely returns the expected results.
+
+The semantic model uses friendly column names, but users ask questions using company-specific terminology.
+
+What should you do?
+
+A. Add synonyms to the semantic model.
+
+B. Create calculated columns.
+
+C. Enable Auto Date/Time.
+
+D. Change every column to Text.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Adding synonyms helps Q&A recognize business terminology and improves natural language queries.
+
+---
+
+# Question 5 – Optimize Ribbon
+
+A report page loads slowly.
+
+You want to identify visuals that negatively affect performance without changing the report.
+
+Which tool should you use FIRST?
+
+A. Optimize ribbon
+
+B. Performance Analyzer
+
+C. Query Diagnostics
+
+D. DAX Studio
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Performance Analyzer identifies how much time each visual spends running DAX queries, rendering, and other operations. It is the first tool to diagnose report performance.
+
+---
+
+# Question 6 – Conditional Formatting
+
+A matrix displays yearly sales.
+
+Management wants an icon to appear next to values that exceed the annual sales target.
+
+Which feature should you use?
+
+A. Bookmarks
+
+B. Conditional Formatting
+
+C. Field Parameters
+
+D. Report Tooltips
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Conditional Formatting supports icons, colors, and data bars based on business rules.
+
+---
+
+# Question 7 – Import vs DirectQuery
+
+A company refreshes its data warehouse once each night.
+
+Report users expect the fastest possible report performance during the day.
+
+Which storage mode should you recommend?
+
+A. DirectQuery
+
+B. Import
+
+C. Live Connection
+
+D. Dual for every table
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+If data changes only nightly, Import mode provides the best query performance because all data is stored in memory.
+
+---
+
+# Question 8 – Drillthrough
+
+A report summarizes sales by salesperson.
+
+Users frequently ask:
+
+> "Show me all invoices for this salesperson."
+
+What is the BEST solution?
+
+A. Drillthrough
+
+B. Bookmark
+
+C. Tooltip Page
+
+D. Small Multiples
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Drillthrough allows users to navigate to a detailed page while preserving the selected filter context.
+
+---
+
+# Question 9 – Power Query Parameters
+
+A report must connect to either the Development or Production SQL Server.
+
+Developers want to switch environments without editing every query.
+
+What should you create?
+
+A. A calculated column
+
+B. A Power Query Parameter
+
+C. A Field Parameter
+
+D. A hierarchy
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Power Query Parameters allow connection information and other values to be changed centrally without rewriting queries.
+
+---
+
+# Question 10 – Data Reduction
+
+A scatter chart displays 2 million data points.
+
+Users report that the visual is difficult to interpret and performs poorly.
+
+What should you do FIRST?
+
+A. Replace the scatter chart with a table.
+
+B. Aggregate the data before displaying it.
+
+C. Increase the report canvas size.
+
+D. Add more data labels.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Displaying millions of individual points is both inefficient and difficult to analyze. Aggregating the data improves readability and performance.
+
+---
+
+# ⭐ PL-300 Review
+
+| Requirement | Best Feature |
+|-------------|--------------|
+| Improve DirectQuery joins | Assume Referential Integrity |
+| Find unexpected values | Column Distribution |
+| Improve accessibility | Alt Text |
+| Improve Q&A | Synonyms |
+| Diagnose report performance | Performance Analyzer |
+| Show icons/colors by value | Conditional Formatting |
+| Fastest report performance with nightly refresh | Import Mode |
+| Navigate to filtered detail page | Drillthrough |
+| Switch between Dev and Prod | Power Query Parameters |
+| Improve charts with excessive detail | Aggregate data |
+
+---
+
+## 🚨 PL-300 Exam Tips
+
+### Column Profiling Tools
+
+| Tool | Primary Purpose |
+|------|-----------------|
+| **Column Quality** | Valid, Error, Empty percentages |
+| **Column Distribution** | Distinct values and frequency |
+| **Column Profile** | Detailed statistics for one column |
+
+---
+
+### Import vs DirectQuery
+
+Microsoft generally favors:
+
+- **Import** when the data is relatively static and performance is the priority.
+- **DirectQuery** when near-real-time access to source data is required or the dataset is too large to import.
+
+---
+
+### Field Parameters vs Power Query Parameters
+
+This is a common point of confusion:
+
+- **Field Parameters** → Let report consumers switch measures or dimensions in visuals.
+- **Power Query Parameters** → Let report authors control connections, filters, or other query values during data preparation.
+
+Remember: **Field Parameters affect the report experience; Power Query Parameters affect data retrieval and transformation.**
+
+# PL-300 Expert Practice Questions – Set 11
+## Mixed Topics (Less Repeated Exam Objectives)
+
+---
+
+# Question 1 – Visual Interactions
+
+A report page contains:
+
+- A bar chart
+- A map
+- A table
+- A KPI card
+
+Selecting a state in the map should:
+
+- Filter the table
+- Filter the bar chart
+- Leave the KPI card unchanged
+
+What should you do?
+
+A. Disable the relationship.
+
+B. Edit Visual Interactions.
+
+C. Create a bookmark.
+
+D. Duplicate the KPI card.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Edit Interactions allows each visual to either filter, highlight, or ignore another visual independently.
+
+---
+
+# Question 2 – Drillthrough vs Tooltip
+
+Users frequently ask:
+
+> "Can I hover over a customer and immediately see last year's sales without leaving the page?"
+
+Which feature should you use?
+
+A. Drillthrough
+
+B. Tooltip Page
+
+C. Bookmarks
+
+D. Q&A
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Tooltip Pages display additional information without navigating away from the report.
+
+---
+
+# Question 3 – Report Pages
+
+Management wants executives to see only three summary pages, while analysts should have access to all fifteen report pages.
+
+What is the BEST solution?
+
+A. Duplicate the report.
+
+B. Hide the detailed pages before publishing the executive report.
+
+C. Create a dashboard.
+
+D. Create another workspace.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Hidden pages remain available to report authors but are not shown during normal report navigation.
+
+---
+
+# Question 4 – Data Categories
+
+A report contains a column named PostalCode.
+
+Power BI attempts to plot the values incorrectly on a map.
+
+What should you configure?
+
+A. Default Summarization
+
+B. Data Category
+
+C. Sort by Column
+
+D. Format String
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Setting the correct Data Category (Postal Code) helps Power BI interpret geographic fields correctly.
+
+---
+
+# Question 5 – Sort by Column
+
+Month names appear alphabetically:
+
+April
+
+August
+
+December
+
+...
+
+How should you correct this?
+
+A. Create a hierarchy.
+
+B. Sort MonthName by MonthNumber.
+
+C. Rename the months.
+
+D. Use a Matrix visual.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Sort by Column lets you display month names while sorting them using a numeric month column.
+
+---
+
+# Question 6 – Default Summarization
+
+A ZIP Code column is automatically summed in visuals.
+
+What should you do?
+
+A. Convert the column to Decimal.
+
+B. Change Default Summarization to **Don't Summarize**.
+
+C. Create a hierarchy.
+
+D. Create a measure.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Identifiers such as ZIP codes should not be aggregated.
+
+---
+
+# Question 7 – Hierarchies
+
+A report contains separate fields for:
+
+Country
+
+State
+
+City
+
+Users frequently drill through these levels.
+
+Which modeling feature simplifies report creation?
+
+A. Measures
+
+B. Hierarchy
+
+C. Calculation Group
+
+D. Perspective
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Hierarchies allow users to drill naturally through related levels.
+
+---
+
+# Question 8 – Keep Rows vs Remove Rows
+
+A CSV contains 20 million transactions.
+
+Only completed orders are needed.
+
+When should you filter the rows?
+
+A. After loading into the semantic model.
+
+B. During report creation.
+
+C. In Power Query before loading.
+
+D. Using a DAX measure.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Removing unnecessary rows before loading reduces refresh time and semantic model size.
+
+---
+
+# Question 9 – Group By
+
+A transaction table contains millions of individual sales.
+
+Management only needs total sales by region.
+
+Which Power Query transformation should you use?
+
+A. Merge
+
+B. Append
+
+C. Group By
+
+D. Split Column
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Group By aggregates detailed records before loading, reducing model size and improving performance.
+
+---
+
+# Question 10 – Split Column
+
+A CustomerName column contains values such as:
+
+```
+John Smith
+Maria Jones
+```
+
+The business wants separate FirstName and LastName columns.
+
+Which transformation should you use?
+
+A. Extract
+
+B. Merge
+
+C. Split Column
+
+D. Pivot
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Split Column separates values based on a delimiter such as a space.
+
+---
+
+# ⭐ PL-300 Review
+
+| Requirement | Best Feature |
+|-------------|--------------|
+| One visual ignores another | Edit Interactions |
+| Hover for more information | Tooltip Page |
+| Hide report pages | Hidden Pages |
+| Correct map behavior | Data Category |
+| Sort month names | Sort by Column |
+| Prevent numeric aggregation | Don't Summarize |
+| Easier drill-down | Hierarchy |
+| Remove unnecessary records | Filter in Power Query |
+| Aggregate before loading | Group By |
+| Separate text values | Split Column |
+
+# PL-300 Expert Practice Questions – Set 12
+## Advanced Scenario Questions (Mixed PL-300 Objectives)
+
+---
+
+# Question 1 – Unpivot vs Pivot
+
+A sales manager provides an Excel workbook containing the following data:
+
+| Employee | Q1 | Q2 | Q3 | Q4 |
+|-----------|----|----|----|----|
+| Amy | 125 | 140 | 152 | 170 |
+| Ben | 98 | 115 | 121 | 138 |
+
+The business wants to create a line chart showing quarterly sales trends by employee.
+
+What should you do first in Power Query?
+
+A. Merge the table with another query.
+
+B. Append the table.
+
+C. Unpivot the quarter columns.
+
+D. Pivot the Employee column.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Charts require the quarter values to exist in a single column (Quarter) with a corresponding Sales value. Unpivot converts wide data into a normalized format suitable for visuals.
+
+---
+
+# Question 2 – Storage Mode
+
+A semantic model contains:
+
+- Sales (120 million rows)
+- Product (25,000 rows)
+- Customer (180,000 rows)
+
+Sales data changes every few minutes.
+
+This is a composite model.
+
+Users frequently slice reports by Product and Customer and complain about slow filtering.
+
+Which storage mode should be assigned to the Product and Customer tables?
+
+A. Import
+
+B. DirectQuery
+
+C. Dual
+
+D. Live Connection
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Dual storage mode allows dimension tables to behave as Import or DirectQuery depending on the query, improving performance in composite models.
+
+---
+
+# Question 3 – Tenant Settings
+
+The Power BI administrator wants to prevent users from publishing reports publicly to the internet while continuing to allow internal sharing within the organization.
+
+Which tenant setting should be disabled?
+
+A. Export Data
+
+B. Publish to web
+
+C. Build Permission
+
+D. XMLA Endpoint
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Disabling **Publish to web** prevents anonymous public access while preserving secure internal sharing.
+
+---
+
+# Question 4 – Dashboard Tiles
+
+A report containing five visuals has already been published to the Power BI Service.
+
+Management wants one visual displayed on an existing dashboard.
+
+What should you do?
+
+A. Open the report in the Service and pin the visual to the dashboard.
+
+B. Publish the report again.
+
+C. Export the report to PDF.
+
+D. Create a bookmark.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Dashboard tiles are created in the **Power BI Service** by pinning visuals from reports.
+
+---
+
+# Question 5 – CALCULATE + KEEPFILTERS
+
+A report page includes a slicer for Product Category.
+
+Management requests a measure that always filters to products priced above $100 **while still respecting the user's Product Category selection**.
+
+Which DAX expression best meets the requirement?
+
+A.
+
+```DAX
+CALCULATE(
+    [Sales],
+    Product[Price] > 100
+)
+```
+
+B.
+
+```DAX
+CALCULATE(
+    [Sales],
+    KEEPFILTERS(Product[Price] > 100)
+)
+```
+
+C.
+
+```DAX
+CALCULATE(
+    [Sales],
+    REMOVEFILTERS(Product)
+)
+```
+
+D.
+
+```DAX
+SUM(Sales[SalesAmount])
+```
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+`KEEPFILTERS()` adds the price condition while preserving existing filters (such as Product Category) instead of replacing them.
+
+---
+
+# Question 6 – Remove Unwanted Columns
+
+A SQL table contains 45 columns.
+
+Only 12 are required for reporting.
+
+What is the BEST approach?
+
+A. Hide the unused columns.
+
+B. Remove the columns in Power Query before loading.
+
+C. Delete the columns after publishing.
+
+D. Remove the columns using DAX.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Removing unnecessary columns before loading reduces model size, refresh time, and memory usage.
+
+---
+
+# Question 7 – Paginated Reports
+
+A finance department needs a report that:
+
+- Prints perfectly on legal-size paper
+- Contains thousands of invoice rows
+- Requires exact page breaks and repeating headers
+
+Which reporting solution should you recommend?
+
+A. Dashboard
+
+B. Standard Power BI Report
+
+C. Paginated Report
+
+D. Scorecard
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Paginated Reports are designed for highly formatted, printable, and pixel-perfect reports.
+
+---
+
+# Question 8 – Left Outer Join
+
+You have:
+
+**Sales**
+
+- OrderID
+- CustomerID
+
+**Customers**
+
+- CustomerID
+- CustomerName
+
+Management wants every sales record returned, even if a matching customer record does not exist.
+
+Which join should you use?
+
+A. Inner
+
+B. Left Outer
+
+C. Right Outer
+
+D. Full Outer
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A Left Outer join keeps every row from the first (left) table and matches rows from the second table when available.
+
+---
+
+# Question 9 – PBIDS Files
+
+A BI team wants business users to connect to the correct Power BI semantic model without manually entering connection information.
+
+Which file type should they distribute?
+
+A. PBIX
+
+B. PBIDS
+
+C. PBIT
+
+D. CSV
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A **PBIDS** file stores connection information and opens Power BI Desktop connected to the specified data source.
+
+---
+
+# Question 10 – Dashboard Alerts
+
+An executive wants to receive an email whenever daily sales exceed $500,000.
+
+What should you configure?
+
+A. Bookmark
+
+B. Dashboard Data Alert
+
+C. Drillthrough
+
+D. Tooltip Page
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Data Alerts can be created on supported dashboard tiles in the Power BI Service and notify users when a KPI reaches a specified threshold.
+
+---
+
+# ⭐ Bonus Review (Rapid Fire)
+
+| Requirement | Best Feature |
+|-------------|--------------|
+| Normalize month columns | Unpivot |
+| Fast composite model filtering | Dual Storage Mode |
+| Prevent public internet reports | Disable Publish to Web |
+| Add report visual to dashboard | Pin Visual |
+| Preserve existing filters in CALCULATE | KEEPFILTERS() |
+| Reduce semantic model size | Remove Columns in Power Query |
+| Printable invoices | Paginated Report |
+| Keep all rows from first table | Left Outer Join |
+| Preconfigured data connection | PBIDS |
+| Email when KPI exceeds threshold | Dashboard Alert |
+
+# PL-300 Expert Practice Questions – Set 13
+## Advanced Scenario Questions (Mixed PL-300 Objectives)
+
+---
+
+# Question 1 – Fill Down
+
+You import an Excel worksheet that was formatted for printing.
+
+| Department | Employee | Salary |
+|------------|----------|--------|
+| Sales | John | 65,000 |
+| *(blank)* | Mary | 72,000 |
+| *(blank)* | Tim | 69,000 |
+| HR | Susan | 81,000 |
+| *(blank)* | David | 78,000 |
+
+Every employee should inherit the department listed above them.
+
+Which Power Query transformation should you use?
+
+A. Replace Values
+
+B. Fill Down
+
+C. Merge Columns
+
+D. Group By
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+**Fill Down** copies the last non-blank value into subsequent blank rows, making it ideal for importing Excel reports designed for printing.
+
+---
+
+# Question 2 – Top N Filter
+
+A report contains sales for 4,000 products.
+
+Management wants to display **only the 15 products with the highest sales amount**, while allowing users to change Year and Region using slicers.
+
+Which solution is BEST?
+
+A. Filter the Product table in Power Query.
+
+B. Apply a Top N visual filter using Total Sales.
+
+C. Create a calculated column ranking the products.
+
+D. Remove products outside the top 15 from the model.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A **Top N visual filter** dynamically responds to slicers and displays the highest-ranking products based on a measure.
+
+---
+
+# Question 3 – Column Profile vs Distribution
+
+A data analyst needs to identify:
+
+- Minimum value
+- Maximum value
+- Average
+- Standard deviation
+- Number of distinct values
+
+Which Power Query profiling feature should they use?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Diagnostics
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+**Column Profile** provides detailed statistics for the selected column, including min, max, average, distinct count, and value distribution.
+
+---
+
+# Question 4 – Outliers
+
+A scatter chart displays customer spending.
+
+Five customers have purchases over $10 million, while most customers spend less than $5,000.
+
+The outliers make the remaining points appear compressed near the origin.
+
+Management wants to minimize the visual impact of the outliers **without deleting any data**.
+
+What is the BEST solution?
+
+A. Delete the outlier records.
+
+B. Apply a visual-level filter to exclude the outliers.
+
+C. Use a logarithmic scale (if appropriate for the visual and analysis).
+
+D. Convert the scatter chart to a pie chart.
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+When supported and appropriate, a logarithmic scale reduces the visual dominance of extreme values while preserving all data. If a log scale isn't suitable for the chosen visual, other techniques may be needed, but the goal is to preserve the data.
+
+---
+
+# Question 5 – Sensitivity Labels
+
+A report contains employee salaries.
+
+The organization uses Microsoft Purview sensitivity labels.
+
+The report should automatically inherit organizational protection policies when shared.
+
+What should you apply?
+
+A. Certified endorsement
+
+B. Promoted endorsement
+
+C. Sensitivity Label
+
+D. Build Permission
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Sensitivity Labels classify and protect sensitive content and integrate with Microsoft Purview protection policies.
+
+---
+
+# Question 6 – Merge vs Append
+
+A retail company receives:
+
+- One table containing Products
+- One table containing Suppliers
+
+Each product has one SupplierID.
+
+The business wants the supplier name added to every product.
+
+Which Power Query transformation should you use?
+
+A. Append
+
+B. Merge
+
+C. Pivot
+
+D. Unpivot
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Merge combines related tables using matching keys. Append stacks rows from tables with the same structure.
+
+---
+
+# Question 7 – Workspace Roles
+
+A user should:
+
+- Publish reports
+- Update semantic models
+- Create dashboards
+
+The user should **not** be able to add or remove workspace members.
+
+Which workspace role is MOST appropriate?
+
+A. Viewer
+
+B. Contributor
+
+C. Member
+
+D. Admin
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A **Member** can publish, edit, and manage content but cannot manage workspace access like an Admin.
+
+---
+
+# Question 8 – Dashboard Mobile Layout
+
+An executive reports that dashboard tiles appear in an inconvenient order on their phone.
+
+You need to optimize the mobile experience.
+
+What should you do?
+
+A. Resize the report page.
+
+B. Edit the dashboard's Mobile Layout in the Power BI Service.
+
+C. Create a phone layout in Power BI Desktop.
+
+D. Enable Responsive visuals.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Dashboard mobile layouts are configured **in the Power BI Service**. (Phone layouts in Power BI Desktop apply to reports, not dashboards.)
+
+---
+
+# Question 9 – Sync Slicers
+
+A report contains six pages.
+
+A Date slicer should maintain the same selection across every page, but the slicer itself should only appear on two pages.
+
+Which feature should you use?
+
+A. Duplicate the slicer.
+
+B. Sync Slicers and hide the slicer on selected pages.
+
+C. Bookmarks.
+
+D. Drillthrough.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Sync Slicers allows filter selections to stay synchronized across report pages while controlling where the slicer is visible.
+
+---
+
+# Question 10 – Suitable Visual
+
+Management wants to compare:
+
+- Actual Sales
+- Target Sales
+
+for every sales region.
+
+The report should clearly show regions that exceeded or fell short of their targets.
+
+Which visual is MOST appropriate?
+
+A. Pie Chart
+
+B. Gauge
+
+C. Clustered Column Chart
+
+D. Scatter Chart
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+A **Clustered Column Chart** allows users to compare Actual versus Target across multiple categories. A Gauge is better suited for showing progress toward a target for a single measure or a small number of KPIs.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Requirement | Best Solution |
+|--------------|---------------|
+| Fill blank values from above | Fill Down |
+| Dynamic Top 15 products | Top N Visual Filter |
+| Detailed column statistics | Column Profile |
+| Reduce impact of outliers | Logarithmic scale (when appropriate) |
+| Protect confidential reports | Sensitivity Label |
+| Combine related tables | Merge |
+| Publish content without managing users | Member |
+| Arrange dashboard for phones | Dashboard Mobile Layout |
+| Same slicer selection across pages | Sync Slicers |
+| Compare Actual vs Target by category | Clustered Column Chart |
+
+---
+
+## 🚨 PL-300 Exam Traps
+
+| Microsoft Says... | They're Testing... |
+|-------------------|--------------------|
+| "Rows inherit the value above" | Fill Down |
+| "Highest 10/15/20 records" | Top N filter |
+| "Detailed statistics" | Column Profile |
+| "Protect sensitive data" | Sensitivity Labels |
+| "Optimize dashboard on phones" | Dashboard Mobile Layout |
+| "Same filter across report pages" | Sync Slicers |
+| "Compare two measures across categories" | Clustered Column Chart |
+| "Add columns from another table" | Merge |
