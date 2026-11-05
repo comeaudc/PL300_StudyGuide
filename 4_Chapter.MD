@@ -407,28 +407,136 @@ USERELATIONSHIP()
 ```
 
 ---
-
 # 4.9 Date Tables
 
-Date tables are essential for time intelligence.
+Date tables (also called calendar tables) are dedicated tables containing a continuous sequence of dates. They are essential for time-based analysis and DAX time-intelligence calculations.
 
-Examples:
+A date table allows you to consistently analyze data across different time periods and can connect to multiple fact tables, such as Sales, Orders, and Returns.
 
-* Year
-* Quarter
-* Month
-* Day
+**Common Date Table Attributes:**
+- Year
+- Quarter
+- Month Number
+- Month Name
+- Year-Month
+- Day
+- Day of Week
+- Fiscal Year (when applicable)
+
+---
+
+## Good Date Table
+
+A date table typically contains one row for every date in the analysis period, along with additional columns for grouping and filtering.
+
+| Date | Year | Quarter | Month Number | Month Name |
+|---|---:|---|---:|---|
+| 2025-01-01 | 2025 | Q1 | 1 | January |
+| 2025-01-02 | 2025 | Q1 | 1 | January |
+| 2025-02-01 | 2025 | Q1 | 2 | February |
+| 2025-04-01 | 2025 | Q2 | 4 | April |
+
+**Important:** The date table includes every date, even when no transactions occurred on that date.
 
 ---
 
-# Good Date Table
+## Creating a Date Table
 
-Contains:
+Power BI supports two common DAX functions for creating date tables.
 
-| Date | Year | Month | Quarter |
-| ---- | ---- | ----- | ------- |
+**CALENDAR()** — Creates a date table using a specified start and end date.
+
+```dax
+Date =
+CALENDAR(
+    DATE(2020, 1, 1),
+    DATE(2030, 12, 31)
+)
+```
+
+**CALENDARAUTO()** — Automatically determines the date range based on dates found in the data model.
+
+```dax
+Date = CALENDARAUTO()
+```
+
+Use `CALENDAR()` when you want explicit control over the date range. Use `CALENDARAUTO()` when you want Power BI to determine the range automatically.
 
 ---
+
+## Date Table Requirements
+
+A properly configured date table should:
+
+- **Have unique dates:** Each date appears exactly once.
+- **Contain no blank dates:** The date column should not contain blanks.
+- **Have continuous dates:** No dates are missing from the sequence.
+- **Cover the analysis period:** Include all dates needed for historical analysis and, when appropriate, future reporting or forecasting.
+- **Use an appropriate data type:** The primary date column should use the Date data type.
+- **Be marked as a date table:** In Power BI Desktop, use *Table tools → Mark as date table* when working with classic DAX time intelligence.
+
+---
+
+## Relationships with Fact Tables
+
+Date tables typically connect to fact tables through a **one-to-many relationship**.
+
+Example:
+
+`Date[Date] (1) → Sales[Order Date] (*)`
+
+- The Date table is on the **one** side because each date appears once.
+- The Sales table is on the **many** side because multiple transactions can occur on the same date.
+- The relationship allows date filters and slicers to filter the related sales data.
+
+A single Date table can connect to multiple fact tables, providing consistent time-based filtering throughout the model.
+
+---
+
+## Why Use Date Tables?
+
+Date tables support time intelligence and make time-based reporting more reliable.
+
+Common applications include:
+
+- **Year-to-date (YTD):** Calculate cumulative totals from the beginning of the year.
+- **Previous-year comparisons:** Compare current results with the corresponding period last year.
+- **Month-over-month analysis:** Compare results between consecutive months.
+- **Quarter-to-date (QTD):** Calculate cumulative totals within a quarter.
+- **Trend analysis:** Analyze performance over continuous time periods, including dates without transactions.
+
+### Common Time-Intelligence Functions
+
+| Function | Purpose |
+|---|---|
+| `TOTALYTD()` | Calculates a year-to-date total. |
+| `DATESYTD()` | Returns the dates from the beginning of the year through the current context. |
+| `SAMEPERIODLASTYEAR()` | Returns the corresponding period from the previous year. |
+| `DATEADD()` | Shifts a date context by a specified interval. |
+| `PREVIOUSMONTH()` | Returns dates from the previous month. |
+
+**Example: Sales Year-to-Date Measure**
+
+```dax
+Sales YTD =
+TOTALYTD(
+    [Total Sales],
+    'Date'[Date]
+)
+```
+
+This measure calculates cumulative sales from the beginning of the year through the current date context.
+
+---
+
+## Important Considerations
+
+- **Month sorting:** Month names are text and may sort alphabetically. Use *Sort by column* to sort `Month Name` by `Month Number`.
+- **Active relationships:** Power BI uses active relationships by default. An inactive date relationship can be used in a measure with `USERELATIONSHIP()`.
+- **Fiscal calendars:** Some organizations use fiscal years that do not align with the January–December calendar year.
+- **Dedicated versus automatic dates:** Power BI's Auto date/time feature is convenient for simple reports, but a dedicated Date table is generally preferable for complex models and shared time-based analysis.
+
+**Key Takeaway:** A Date table provides a consistent calendar for filtering, grouping, and comparing data over time. A properly configured Date table and its relationships are foundational to reliable time-intelligence calculations in Power BI.
 
 # Date Table Requirements
 

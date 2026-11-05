@@ -4731,3 +4731,1005 @@ Hidden pages provide a cleaner navigation experience while remaining available w
 - **Dual** = Optimizes composite models
 
 - Don't rely on **color alone** to communicate information—Microsoft frequently tests accessibility best practices.
+
+# PL-300 Expert Practice Questions – Set 16
+## Microsoft PL-300 Scenario Questions (Mixed Topics)
+
+> These questions are modeled after the style of the PL-300 exam. They emphasize business scenarios, Power BI Desktop, Power BI Service, Power Query, DAX, modeling, and report authoring. Each question has one **best** answer.
+
+---
+
+# Question 1 – Incremental Refresh
+
+A Power BI semantic model contains 180 million sales records.
+
+New transactions are added throughout the day, but historical records rarely change.
+
+You need to reduce refresh times while ensuring new data is loaded each day.
+
+What should you do first?
+
+A. Configure query folding for every transformation.
+
+B. Create **RangeStart** and **RangeEnd** parameters in Power Query.
+
+C. Change the semantic model to DirectQuery.
+
+D. Create a calculated table for recent sales.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Incremental Refresh begins with creating **RangeStart** and **RangeEnd** parameters. These parameters define the refresh window and are later used in the Incremental Refresh policy. For most supported sources, maintaining query folding is also important, but creating the parameters is the first configuration step.
+
+---
+
+# Question 2 – RLS vs Workspace Roles
+
+A sales manager should only see data for their own region.
+
+The manager must continue using the same report as every other manager.
+
+What should you implement?
+
+A. Viewer workspace role
+
+B. Build permission
+
+C. Row-Level Security (RLS)
+
+D. A separate report for each region
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+RLS filters the data each user can see while allowing everyone to use the same semantic model and report.
+
+---
+
+# Question 3 – Composite Models
+
+A semantic model contains:
+
+- Sales from SQL Server using DirectQuery
+- Budget data imported from Excel
+
+Management wants to analyze both datasets together in one report.
+
+What modeling approach should you use?
+
+A. Live Connection
+
+B. Composite Model
+
+C. Import only
+
+D. Direct Lake
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Composite models allow Import and DirectQuery storage modes to coexist in the same semantic model.
+
+---
+
+# Question 4 – Query Folding
+
+A Power Query transformation sequence is:
+
+1. Remove Columns
+2. Filter Rows
+3. Sort Rows
+4. Add Index Column
+
+After adding the Index column, query folding stops.
+
+Which statement is MOST accurate?
+
+A. Query folding always stops after Sort.
+
+B. The Add Index step may prevent additional transformations from folding.
+
+C. Remove Columns prevents query folding.
+
+D. Filter Rows always prevents query folding.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Adding an Index column often prevents subsequent steps from folding, depending on the data source. Placing non-folding transformations later in the query can help maximize folding.
+
+---
+
+# Question 5 – Relationships
+
+A report returns incorrect totals.
+
+Investigation shows there are two active filter paths between the Customer and Sales tables.
+
+What is the MOST likely cause?
+
+A. Duplicate measures
+
+B. Ambiguous relationships
+
+C. Auto Date/Time
+
+D. Hidden columns
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Multiple active filter paths can create ambiguous relationships, leading to unexpected filtering behavior and incorrect results.
+
+---
+
+# Question 6 – Report vs Dashboard
+
+An executive wants a single screen containing:
+
+- A KPI from Sales
+- A chart from Inventory
+- A gauge from Finance
+
+The visuals originate from different reports.
+
+What should you create?
+
+A. One report page
+
+B. Dashboard
+
+C. Matrix
+
+D. Scorecard
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A Power BI dashboard can display tiles pinned from multiple reports and semantic models, making it ideal for executive summaries.
+
+---
+
+# Question 7 – Drillthrough
+
+Users analyze total sales by region.
+
+When they right-click a region, they want to open another page displaying only customers from that region.
+
+What feature should you configure?
+
+A. Tooltip Page
+
+B. Drillthrough
+
+C. Bookmark
+
+D. Sync Slicers
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Drillthrough passes the selected filter context (the region) to another report page for detailed analysis.
+
+---
+
+# Question 8 – Power Query Errors
+
+A Power Query step attempts to convert a Text column to Whole Number.
+
+Every value in the column fails conversion, causing the query preview to display an error instead of data.
+
+Which error type occurred?
+
+A. Cell-level error
+
+B. Step-level error
+
+C. Data profiling error
+
+D. Relationship error
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+When an entire transformation step fails and prevents the query from producing results, it is a **step-level error**. A cell-level error affects only individual values while the query continues.
+
+---
+
+# Question 9 – RELATED()
+
+The Sales table contains ProductID.
+
+The Product table contains ProductName.
+
+You need a calculated column in the Sales table that returns the corresponding ProductName.
+
+Which DAX function should you use?
+
+A. RELATED()
+
+B. RELATEDTABLE()
+
+C. VALUES()
+
+D. SELECTEDVALUE()
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+`RELATED()` retrieves a value from the "one" side of a relationship and is commonly used in calculated columns.
+
+---
+
+# Question 10 – Deployment
+
+A development team uses separate Development, Test, and Production workspaces.
+
+They want to promote reports between environments while minimizing manual work.
+
+Which Power BI feature should they use?
+
+A. Deployment Pipelines
+
+B. Sensitivity Labels
+
+C. Dataflows
+
+D. Personal Bookmarks
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Deployment Pipelines help organizations move Power BI content through Development, Test, and Production environments while supporting controlled deployments.
+
+---
+
+# ⭐ PL-300 Quick Review
+
+| Business Requirement | Best Solution |
+|----------------------|---------------|
+| Refresh only recent data | Incremental Refresh |
+| Restrict rows by user | Row-Level Security |
+| Import + DirectQuery together | Composite Model |
+| Preserve query folding | Delay non-folding steps |
+| Resolve multiple filter paths | Remove ambiguity |
+| Combine visuals from multiple reports | Dashboard |
+| Navigate to filtered details | Drillthrough |
+| Entire transformation fails | Step-level error |
+| Lookup related value | RELATED() |
+| Promote content through environments | Deployment Pipelines |
+
+---
+
+## 🚨 PL-300 Exam Tips
+
+### RELATED vs RELATEDTABLE
+
+- **RELATED()** → Returns a single value from the **one** side of a relationship.
+- **RELATEDTABLE()** → Returns a table of related rows from the **many** side.
+
+---
+
+### RLS vs Workspace Roles
+
+- **Workspace roles** control what users can do with content.
+- **RLS** controls which **data** users can see.
+
+---
+
+### Dashboard vs Report
+
+- **Dashboard** → One page, Service only, can combine visuals from multiple reports.
+- **Report** → Multiple pages, interactive analysis, created primarily in Desktop.
+
+# PL-300 Expert Practice Questions – Set 17
+## Microsoft PL-300 Scenario Questions (Mixed Topics + Date Tables)
+
+> These questions are modeled after the current PL-300 exam style. They focus on business scenarios where multiple answers may seem correct, but only one is Microsoft's recommended solution.
+
+---
+
+# Question 1 – Auto Date/Time vs Date Table
+
+A Power BI semantic model contains:
+
+- Sales
+- Budget
+- Inventory
+- Returns
+
+Each table contains its own Date column.
+
+The report uses YTD, QTD, Previous Year, and Month-over-Month calculations across all four tables.
+
+What should you do?
+
+A. Leave Auto Date/Time enabled.
+
+B. Create one marked Date table and disable Auto Date/Time.
+
+C. Create four separate Date tables.
+
+D. Create calculated columns for Year and Month in every table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A single marked Date table supports consistent time intelligence across multiple fact tables and reduces hidden date tables created by Auto Date/Time.
+
+---
+
+# Question 2 – Auto Date/Time
+
+A developer creates a small proof-of-concept report using a single Excel table.
+
+The report contains only one Date column and does not use any advanced time intelligence calculations.
+
+What is Microsoft's recommended approach?
+
+A. Create a Date table immediately.
+
+B. Leave Auto Date/Time enabled.
+
+C. Disable Auto Date/Time and use text dates.
+
+D. Use DirectQuery.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+For small, simple models, Auto Date/Time is acceptable. Microsoft generally recommends a dedicated Date table for production models, especially when multiple date columns or advanced time intelligence are involved.
+
+---
+
+# Question 3 – Model Size
+
+A semantic model contains twelve fact tables.
+
+Auto Date/Time is enabled.
+
+The model is much larger than expected.
+
+Which action is MOST likely to reduce the model size?
+
+A. Hide the hidden date tables.
+
+B. Create one marked Date table and disable Auto Date/Time.
+
+C. Change every table to DirectQuery.
+
+D. Remove all relationships.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Auto Date/Time creates a hidden date table for each eligible date column. Replacing these with a single shared Date table can significantly reduce model size.
+
+---
+
+# Question 4 – Workspace Role
+
+A business analyst needs to perform the following tasks in a Fabric workspace:
+
+- Create reports
+- Edit reports
+- Publish reports
+- Refresh and update semantic models
+
+The analyst **must not** be able to:
+
+- Add or remove workspace users
+- Change workspace settings
+- Publish or update the workspace app
+
+Which workspace role should you assign?
+
+A. Viewer
+
+B. Contributor
+
+C. Member
+
+D. Admin
+
+## ✅ Answer
+
+**B. Contributor**
+
+### Explanation
+
+The **Contributor** role allows users to create, edit, publish, and update content within a workspace, including reports and semantic models. Contributors can also create dashboards and other workspace content.
+
+However, Contributors **cannot**:
+
+- Manage workspace access
+- Change workspace settings
+- Publish or update the workspace app
+
+These additional administrative capabilities belong to the **Member** or **Admin** roles, making **Contributor** the principle of least privilege and the best choice for this scenario.
+
+---
+
+# Question 5 – Power Query Data Profiling
+
+A Product Category column contains values such as:
+
+- Bike
+- Bikes
+- BIKES
+- Bikee
+
+Before cleaning the data, you need to perform the **most comprehensive analysis** of the column to identify inconsistent values, review statistics, and understand the value distribution.
+
+Which Power Query feature should you use?
+
+A. Column Quality
+
+B. Column Distribution
+
+C. Column Profile
+
+D. Query Dependencies
+
+## ✅ Answer
+
+**C. Column Profile**
+
+### Explanation
+
+**Column Profile** provides the most detailed analysis of a selected column, including:
+
+- Value distribution
+- Distinct values
+- Frequency of values
+- Minimum and maximum values (where applicable)
+- Empty values
+- Error values
+- Statistical information
+
+While **Column Distribution** is useful for quickly identifying duplicate values and their frequency, **Column Profile** includes that information **plus additional statistics**, making it the best choice when performing a thorough investigation before cleaning the data.
+
+> **PL-300 Tip:**  
+> - **Column Quality** → Valid, Error, and Empty values  
+> - **Column Distribution** → Frequency and distinct values (quick overview)  
+> - **Column Profile** → Complete statistical analysis of a selected column
+
+---
+
+# Question 6 – Dashboard Tiles
+
+A report contains six visuals.
+
+Only one visual should appear on the executive dashboard.
+
+What is the BEST approach?
+
+A. Share the report.
+
+B. Pin the visual to an existing dashboard.
+
+C. Export the report to PowerPoint.
+
+D. Publish the report again.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Dashboard tiles are created by pinning visuals from reports in the Power BI Service.
+
+---
+
+# Question 7 – Merge vs Append
+
+A company imports:
+
+JanuarySales.csv
+
+FebruarySales.csv
+
+MarchSales.csv
+
+Each file has identical columns.
+
+What should you do?
+
+A. Merge the files.
+
+B. Append the files.
+
+C. Create relationships.
+
+D. Unpivot the tables.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Append combines rows from tables with identical structures into one larger table.
+
+---
+
+# Question 8 – Suitable Visual
+
+Management asks:
+
+> "Show whether each sales region met its target, and make it easy to compare regions."
+
+Which visual is MOST appropriate?
+
+A. Gauge
+
+B. Clustered Column Chart
+
+C. Pie Chart
+
+D. Card
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+A clustered column chart compares Actual vs. Target across multiple categories. Gauges are best suited for one measure or a small number of KPIs.
+
+---
+
+# Question 9 – Sensitivity Labels
+
+A report contains confidential employee salary information.
+
+The organization already uses Microsoft Purview Information Protection.
+
+What should you apply before sharing the report?
+
+A. Certified endorsement
+
+B. Promoted endorsement
+
+C. Sensitivity Label
+
+D. Build Permission
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+Sensitivity labels classify and protect Power BI content according to organizational data protection policies.
+
+---
+
+# Question 10 – DAX Time Intelligence
+
+A report includes this measure:
+
+```DAX
+Sales LY =
+SAMEPERIODLASTYEAR(Date[Date])
+```
+
+The measure returns incorrect results.
+
+Which issue is MOST likely?
+
+A. The Date table is not marked as a Date table.
+
+B. The Sales table has too many rows.
+
+C. Auto Date/Time is disabled.
+
+D. The report contains bookmarks.
+
+## ✅ Answer
+
+**A**
+
+### Explanation
+
+Time intelligence functions such as `SAMEPERIODLASTYEAR()` work best with a properly marked Date table. If a custom Date table is used but not marked, time intelligence calculations may not behave as expected.
+
+> **Exam note:** Auto Date/Time can support some built-in time intelligence scenarios, but for production models and explicit Date tables, Microsoft recommends marking the Date table.
+
+---
+
+# ⭐ PL-300 Review
+
+| Requirement | Best Solution |
+|-------------|---------------|
+| Multiple fact tables | One marked Date table |
+| Small one-table model | Auto Date/Time is acceptable |
+| Reduce hidden date tables | Disable Auto Date/Time |
+| Publish without managing users | Member role |
+| Find inconsistent values | Column Distribution |
+| Add report visual to dashboard | Pin Visual |
+| Combine monthly files | Append |
+| Compare Actual vs Target | Clustered Column Chart |
+| Protect confidential reports | Sensitivity Label |
+| Advanced time intelligence | Marked Date table |
+
+---
+
+# 🚨 PL-300 Exam Traps
+
+### Auto Date/Time
+
+✅ Good for:
+- Small models
+- One date column
+- Quick prototypes
+
+❌ Avoid when:
+- Multiple fact tables
+- Multiple date columns
+- Advanced time intelligence
+- Enterprise semantic models
+- Model size matters
+
+---
+
+### Date Table
+
+A proper Date table should:
+
+- Contain unique dates
+- Have no missing dates
+- Span the required date range
+- Be marked as a Date table
+- Be related to the fact table(s)
+
+---
+
+### Microsoft Recommendation
+
+If the exam mentions:
+- **Production model**
+- **Enterprise semantic model**
+- **Multiple fact tables**
+- **Model size**
+- **Time intelligence**
+
+The correct answer is almost always:
+
+✅ **Create one marked Date table and disable Auto Date/Time**
+
+# PL-300 Expert Practice Questions – Set 18
+## Advanced Scenario Questions
+
+---
+
+# Question 1 – Duplicate vs Reference
+
+You created a Power Query named **Sales_Clean** that performs all data cleansing.
+
+A second query should use the cleaned data and then apply several additional transformations. Future changes to **Sales_Clean** should automatically be reflected in the second query.
+
+Which option should you choose?
+
+A. Duplicate
+
+B. Reference
+
+C. Append
+
+D. Merge
+
+## ✅ Answer
+
+**B. Reference**
+
+### Explanation
+
+A **Reference** creates a new query that depends on the original query. Any future changes to **Sales_Clean** automatically flow into the referenced query.
+
+A **Duplicate** creates an independent copy.
+
+---
+
+# Question 2 – Disable Load
+
+A Power Query solution contains five staging queries used only to prepare data before creating the final Sales table.
+
+The staging queries should not consume memory in the semantic model.
+
+What should you do?
+
+A. Hide the queries.
+
+B. Disable **Enable Load** for the staging queries.
+
+C. Delete the staging queries.
+
+D. Convert the staging queries to calculated tables.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Disabling **Enable Load** prevents intermediate queries from being loaded into the semantic model while still allowing other queries to reference them.
+
+---
+
+# Question 3 – Cardinality
+
+A Product table contains one row per product.
+
+A Sales table contains many transactions for each product.
+
+What relationship cardinality should be configured?
+
+A. One-to-One
+
+B. Many-to-Many
+
+C. One-to-Many
+
+D. Many-to-One
+
+## ✅ Answer
+
+**C**
+
+### Explanation
+
+The Product table is the **one** side, and the Sales table is the **many** side.
+
+---
+
+# Question 4 – Active Relationships
+
+A Sales table contains:
+
+- OrderDate
+- ShipDate
+
+Both columns relate to the Date table.
+
+Why should only one relationship remain active?
+
+A. Power BI allows only one Date table.
+
+B. Multiple active relationships between the same tables create ambiguous filter paths.
+
+C. Active relationships increase model size.
+
+D. Active relationships prevent DAX calculations.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Only one relationship between the same two tables can be active at a time to avoid ambiguous filtering. The inactive relationship can be used with `USERELATIONSHIP()` when needed.
+
+---
+
+# Question 5 – Q&A Visual
+
+Business users frequently ask questions such as:
+
+> "Show total sales by state."
+
+However, they often type:
+
+> "Show revenue by province."
+
+Power BI returns incorrect results.
+
+What should you do?
+
+A. Rename every column.
+
+B. Add synonyms to the semantic model.
+
+C. Create a new hierarchy.
+
+D. Use a Matrix visual.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Adding **synonyms** improves the Q&A visual's ability to understand business terminology.
+
+---
+
+# Question 6 – Drill Mode
+
+A column chart displays:
+
+Year
+
+Quarter
+
+Month
+
+Management wants users to click directly on a column and automatically move down one level of the hierarchy.
+
+Which drill option should be enabled?
+
+A. Expand all down one level
+
+B. Drill Down
+
+C. Show Next Level
+
+D. Keep All Filters
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+**Drill Down** allows users to click an individual data point and move deeper into that branch of the hierarchy.
+
+---
+
+# Question 7 – Phone Layout
+
+A report looks good in the browser but is difficult to use on a phone because visuals overlap.
+
+Where should you configure the phone layout?
+
+A. Power BI Service
+
+B. Power BI Desktop
+
+C. Microsoft Fabric Admin Portal
+
+D. Power Query Editor
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Phone layouts for **reports** are designed in **Power BI Desktop**. (Dashboard mobile layouts are configured in the Power BI Service.)
+
+---
+
+# Question 8 – Data Types
+
+A SalesAmount column is imported as Text.
+
+Calculations fail and numeric aggregation is unavailable.
+
+What should you do FIRST?
+
+A. Create a measure.
+
+B. Change the column's data type to Decimal Number or Fixed Decimal Number.
+
+C. Split the column.
+
+D. Create a calculated table.
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Numeric calculations require an appropriate numeric data type. Correcting the data type should occur before creating calculations.
+
+---
+
+# Question 9 – Cross-Report Drillthrough
+
+A company has separate Sales and Inventory reports.
+
+Users want to drill from a Sales report directly into the Inventory report while preserving the selected Product.
+
+Which feature should be configured?
+
+A. Bookmark Navigator
+
+B. Cross-report Drillthrough
+
+C. Sync Slicers
+
+D. Tooltip Page
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+Cross-report Drillthrough enables navigation between reports while passing filter context such as Product.
+
+---
+
+# Question 10 – Endorsement
+
+A BI governance team has fully validated a semantic model.
+
+They want users to immediately recognize it as the organization's trusted source for reporting.
+
+Which endorsement should they apply?
+
+A. Promoted
+
+B. Certified
+
+C. Sensitivity Label
+
+D. Build Permission
+
+## ✅ Answer
+
+**B**
+
+### Explanation
+
+**Certified** indicates that the semantic model has been formally reviewed and approved as a trusted organizational data source. **Promoted** is intended to encourage discovery but does not imply formal governance.
+
+---
+
+# ⭐ Quick Review
+
+| Requirement | Best Answer |
+|-------------|-------------|
+| Reuse another query | Reference |
+| Prevent staging queries from loading | Disable Enable Load |
+| Product → Sales | One-to-Many |
+| Two date relationships | One active, one inactive |
+| Improve Q&A terminology | Synonyms |
+| Click visual to go deeper | Drill Down |
+| Design report for phones | Power BI Desktop |
+| Fix numeric calculations | Correct Data Type |
+| Navigate between reports | Cross-report Drillthrough |
+| Trusted semantic model | Certified Endorsement |
